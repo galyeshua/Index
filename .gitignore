@@ -68,4 +68,4 @@ __pycache__/
 
 # app files
 data.json
-app\static\uploads\
+app\static\uploads\*
