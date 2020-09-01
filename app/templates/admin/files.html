@@ -1,0 +1,35 @@
+{% extends 'base_admin.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block scripts %}
+   {{ super() }}
+   {{ moment.include_moment(local_js='/static/js/moment-with-locales.min.js') }}
+{% endblock %}
+
+{% block app_content %}
+<h1>Upload New File</h1>
+<p>Allowed file extensions are Zip and PDF. Maximum file size is 100MB.</p>
+<form action="" method="post" class="form form-inline" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group  required">
+        {{ form.file.label(class="sr-only") }}
+        {{ form.file(accept=".zip,.pdf") }}
+    </div>
+    {{ form.submit(class="btn btn-default") }}
+</form>
+
+<hr>
+<h1>Existing Files</h1>
+<table class="table table-hover">
+    <tr>
+        <th>URL</th>
+        <th>Upload Time</th>
+    </tr>
+    {% for file in files %}
+    <tr>
+        <td>{{ file.url }}</td>
+        <td>{{ moment(file.timestamp).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

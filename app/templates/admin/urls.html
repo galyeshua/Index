@@ -1,0 +1,38 @@
+{% extends 'base_admin.html' %}
+
+{% block scripts %}
+   {{ super() }}
+   {{ moment.include_moment(local_js='/static/js/moment-with-locales.min.js') }}
+{% endblock %}
+
+{% block app_content %}
+<h1>History</h1>
+<p>
+    Pages:
+    {% for page_num in data_json.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+       {% if page_num %}
+           {% if page_num == data_json.page %}
+               <strong>{{ page_num }}</strong>
+           {% else %}
+               <a href="{{ url_for('urls', page=page_num) }}">{{ page_num }}</a>
+           {% endif %}
+       {% else %}
+           ...
+       {% endif %}
+    {% endfor %}
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Upload Time</th>
+        <th>Json</th>
+    </tr>
+    {% for data in data_json.items %}
+    <tr>
+        <td>{{ data.id }}</td>
+        <td>{{ moment(data.create_timestamp).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+        <td><a href="{{ url_for('show_url_json', url_id=data.id) }}">Json</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

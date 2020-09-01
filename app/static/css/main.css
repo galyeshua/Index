@@ -1,0 +1,36 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#mainList > li {
+  padding: 0px 0px 10px 0px;
+}
+
+.itemList > li{
+  float: left;
+  padding: 5px;
+}
+
+.item{
+  border: 2px solid #2d545e;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 65px;
+}
+
+.item:hover{
+  border-color: #12343b;
+  color: #12343b;
+  background: #f5f3ee;
+}
+ul a:hover{
+  text-decoration: none;
+}
+
+hr{
+  border-top: 2px solid #2d545e;
+}
+
+

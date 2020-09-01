@@ -1,0 +1,54 @@
+{% extends 'base_admin.html' %}
+
+{% block styles %}
+{{ super() }}
+    <style>
+        .lg { font-size: xx-large; }
+    </style>
+{% endblock %}
+
+{% block scripts %}
+   {{ super() }}
+   {{ moment.include_moment(local_js='/static/js/moment-with-locales.min.js') }}
+{% endblock %}
+
+{% block app_content %}
+    <h1>Admin Panel</h1>
+    <table>
+        <tr>
+            <td class="col-xs-2">
+                <span class="glyphicon glyphicon-link lg" aria-hidden="true"></span>
+            </td>
+            <td>
+                <h3><a href="{{ url_for('edit') }}">Edit Links</a></h3>
+                {% if data.last_update %}
+                <p>
+                    <strong>Last update: </strong> {{ moment(data.last_update.create_timestamp).fromNow() }} (<a href="{{ url_for('urls') }}">History</a>)
+                </p>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="col-xs-2">
+                <span class="glyphicon glyphicon-user lg" aria-hidden="true"></span>
+            </td>
+            <td>
+                <h3><a href="{{ url_for('add_user') }}">Add user</a></h3>
+                <p>
+                    <strong>Users: </strong> {{ data.user_count }}
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-xs-2">
+                <span class="glyphicon glyphicon-folder-open lg" aria-hidden="true"></span>
+            </td>
+            <td>
+                <h3><a href="{{ url_for('files') }}">Manage Files</a></h3>
+                <p>
+                    <strong>Files: </strong> {{ data.files_count }}
+                </p>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

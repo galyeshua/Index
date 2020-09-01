@@ -1,0 +1,18 @@
+{% extends 'base_admin.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block scripts %}
+   {{ super() }}
+   {{ moment.include_moment(local_js='/static/js/moment-with-locales.min.js') }}
+{% endblock %}
+
+{% block app_content %}
+<h1>Showing Json</h1>
+<p>
+    {{ moment(data_json.create_timestamp).format('MMMM Do YYYY, h:mm:ss a') }}
+</p>
+<hr>
+<p>
+    {{ data_json.data }}
+</p>
+{% endblock %}
